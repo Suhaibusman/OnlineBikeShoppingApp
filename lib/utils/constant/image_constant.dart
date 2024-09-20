@@ -5,6 +5,7 @@ abstract class ImageConstant {
   static const helmetImage = 'assets/helmet.png';
   static const imageBackground = 'assets/imageBackground.png';
   static const smallImageBackground = 'assets/smallImageBackground.png';
+  static const bottomSheetButton = 'assets/bottomsheetbutton.png';
 
   static const blueBackgroundImage = 'assets/bluebackground.png';
 }
