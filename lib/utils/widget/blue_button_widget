@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+
+import 'package:oneline_bike_shopping_app/utils/constant/image_constant.dart';
+import 'package:oneline_bike_shopping_app/utils/widget/text_widget.dart';
+Widget customBlueButtonWidget({
+  required String text,
+  required Function() onPressed,
+  required Color fontColor,
+  FontWeight fontWeight = FontWeight.normal,
+}) {
+  return InkWell(
+    onTap: onPressed,
+    child: Container(
+        height: 43,
+        width: 129,
+        decoration: BoxDecoration(
+           color: Colors.blue,
+          gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                lightblueColor,
+                darkBlueColor,
+
+              ],
+            )
+          ),
+        child: Center(
+            child: customTextWidget(
+          text: text,
+          fontSize: 15,
+          fontWeight: fontWeight,
+          color: fontColor,
+        ))),
+  );
+}
