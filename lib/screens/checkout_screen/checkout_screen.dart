@@ -66,6 +66,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 fit: BoxFit.cover,
               ),
             ),
+            child: customTextWidget(text: "Shipping Address" , color: Colors.white),
           )
         ],
       ),
