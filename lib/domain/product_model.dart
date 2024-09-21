@@ -4,6 +4,7 @@ class ProductModel {
   final String productDetails;
   final String productImage;
   final String productDescription;
+  bool isFav = false;
    int quantity;
   ProductModel({
     required this.productName,

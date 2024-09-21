@@ -92,15 +92,35 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 const TopImageWidget(),
-              Row(
-                children: [
-
-                ],
-              ),
+              // SizedBox(
+              //   height: 150,
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(20.0),
+              //     child: Stack(
+              //       children: [
+              //           Positioned(
+              //             bottom: 0,
+              //
+              //
+              //             child: Container(
+              //               height: 50,
+              //               width: 50,
+              //               decoration: const BoxDecoration(
+              //                 image: DecorationImage(
+              //                   image: AssetImage(ImageConstant.allButtonImage),
+              //                   fit: BoxFit.cover,
+              //                 ),
+              //               ),
+              //             ),
+              //           )
+              //       ],
+              //     ),
+              //   ),
+              // ),
                                 Padding(
                   padding: const EdgeInsets.all(20),
                   child: SizedBox(
-                    height: 800,
+                    height: 700,
                     child: GridView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),

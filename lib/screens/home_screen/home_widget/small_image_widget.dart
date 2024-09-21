@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:oneline_bike_shopping_app/domain/product_model.dart';
 import 'package:oneline_bike_shopping_app/screens/home_screen/home_widget/product_details_screen.dart';
 import 'package:oneline_bike_shopping_app/utils/constant/image_constant.dart';
+import 'package:oneline_bike_shopping_app/utils/themes/color_themes.dart';
 import 'package:oneline_bike_shopping_app/utils/widget/text_widget.dart';
 
 class SmallImageWidget extends StatelessWidget {
@@ -40,10 +41,12 @@ class SmallImageWidget extends StatelessWidget {
             Align(
               alignment: Alignment.topRight,
               child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
+                onPressed: () {
+
+                },
+                icon:  Icon(
                   Icons.favorite_border,
-                  color: Colors.white,
+                  color: productData.isFav ==true ? darkBlueColor:  Colors.white,
                 ),
               ),
             ),
