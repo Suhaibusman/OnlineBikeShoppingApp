@@ -92,8 +92,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 const TopImageWidget(),
-                // const SmallImageWidget(),
-                Padding(
+              Row(
+                children: [
+
+                ],
+              ),
+                                Padding(
                   padding: const EdgeInsets.all(20),
                   child: SizedBox(
                     height: 800,

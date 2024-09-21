@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:oneline_bike_shopping_app/data/data.dart';
 import 'package:oneline_bike_shopping_app/utils/constant/image_constant.dart';
 import 'package:oneline_bike_shopping_app/utils/themes/color_themes.dart';
+import 'package:oneline_bike_shopping_app/utils/widget/blue_button_widget.dart';
 import 'package:oneline_bike_shopping_app/utils/widget/text_widget.dart';
 
 class CartScreen extends StatefulWidget {
@@ -28,7 +29,6 @@ class _CartScreenState extends State<CartScreen> {
       }
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,10 +110,7 @@ class _CartScreenState extends State<CartScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             customTextWidget(
-                              text: "\$ ${
-                                cartItems[index].productPrice *
-                                    cartItems[index].quantity
-                              }",
+                              text: "\$ ${cartItems[index].productPrice * cartItems[index].quantity}",
                               fontSize: 13,
                               color: const Color(0xff3C9EEA),
                             ),
@@ -168,8 +165,18 @@ class _CartScreenState extends State<CartScreen> {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: customBlueButtonWidget(
+              text: "Apply",
+              onPressed: () {},
+              fontColor: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );
   }
+
 }
