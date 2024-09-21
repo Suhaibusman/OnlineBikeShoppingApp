@@ -32,6 +32,7 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: primaryColor,
       body: Column(
         children: [
@@ -72,9 +73,10 @@ class _CartScreenState extends State<CartScreen> {
               ],
             ),
           ),
-          Expanded(
+          SizedBox(
+            height: MediaQuery.of(context).size.height *0.5,
             child: ListView.separated(
-              separatorBuilder: (context, index) => const Divider(),
+              separatorBuilder: (context, index) =>  const Divider(color: Colors.grey,),
               itemCount: cartItems.length,
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -97,7 +99,7 @@ class _CartScreenState extends State<CartScreen> {
                     const SizedBox(width: 10),
                     Column(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         customTextWidget(
@@ -110,10 +112,11 @@ class _CartScreenState extends State<CartScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             customTextWidget(
-                              text: "\$ ${cartItems[index].productPrice * cartItems[index].quantity}",
+                              text: "\$ ${(cartItems[index].productPrice * cartItems[index].quantity).toStringAsFixed(2)}",
                               fontSize: 13,
                               color: const Color(0xff3C9EEA),
                             ),
+                            SizedBox(width: 50,),
                             Row(
                               children: [
                                 InkWell(
@@ -165,14 +168,41 @@ class _CartScreenState extends State<CartScreen> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: customBlueButtonWidget(
-              text: "Apply",
-              onPressed: () {},
-              fontColor: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  height: 44,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        // stops: [0.1, 0.5, 0.7, 0.9],
+                        colors: [Colors.white, Colors.black]
+                    ),
+                  ),
+                  child: TextField(
+                    obscureText: false,
+
+                    decoration: InputDecoration(
+
+                      // enabledBorder: OutlineInputBorder(
+                      //   borderSide: BorderSide(
+                      //       color: Colors.black
+                      //   ),
+                      // ),
+                    ),
+                  ),
+                ),
+              ),
+              customBlueButtonWidget(
+                text: "Apply",
+                onPressed: () {},
+                fontColor: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ],
           ),
         ],
       ),
