@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:oneline_bike_shopping_app/domain/product_model.dart';
 import 'package:oneline_bike_shopping_app/screens/home_screen/home_widget/product_details_screen.dart';
 import 'package:oneline_bike_shopping_app/utils/constant/image_constant.dart';
-import 'package:oneline_bike_shopping_app/utils/themes/color_themes.dart';
 import 'package:oneline_bike_shopping_app/utils/widget/text_widget.dart';
 
-class SmallImageWidget extends StatelessWidget {
+class SmallImageWidget extends StatefulWidget {
   final ProductModel productData;
 
   const SmallImageWidget(
@@ -14,6 +13,11 @@ class SmallImageWidget extends StatelessWidget {
       });
 
   @override
+  State<SmallImageWidget> createState() => _SmallImageWidgetState();
+}
+
+class _SmallImageWidgetState extends State<SmallImageWidget> {
+  @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
@@ -21,7 +25,7 @@ class SmallImageWidget extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => ProductDetailsScreen(
-              productData: productData,
+              productData: widget.productData,
             ),
           ),
         );
@@ -42,17 +46,19 @@ class SmallImageWidget extends StatelessWidget {
               alignment: Alignment.topRight,
               child: IconButton(
                 onPressed: () {
-
+                  setState(() {
+                    widget.productData.isFav = !widget.productData.isFav;
+                  });
                 },
                 icon:  Icon(
-                  Icons.favorite_border,
-                  color: productData.isFav ==true ? darkBlueColor:  Colors.white,
+                  widget.productData.isFav ==true ?Icons.favorite : Icons.favorite_border,
+                  color: widget.productData.isFav ==true ? Colors.red:  Colors.white,
                 ),
               ),
             ),
             Center(
               child: Image.asset(
-                productData.productImage,
+                widget.productData.productImage,
                 height: 70,
                 width: 100, // And also the width
                 // fit: BoxFit.contain,
@@ -67,19 +73,19 @@ class SmallImageWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   customTextWidget(
-                    text: productData.productName,
+                    text: widget.productData.productName,
                     fontSize: 15,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                   customTextWidget(
-                    text: productData.productDetails,
+                    text: widget.productData.productDetails,
                     fontSize: 13,
                     color: Colors.grey,
                     fontWeight: FontWeight.normal,
                   ),
                   customTextWidget(
-                    text: "\$ ${productData.productPrice}",
+                    text: "\$ ${widget.productData.productPrice}",
                     fontSize: 13,
                     color: Colors.grey,
                     fontWeight: FontWeight.normal,
