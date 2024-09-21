@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:oneline_bike_shopping_app/data/data.dart';
+import 'package:oneline_bike_shopping_app/utils/constant/app_constant.dart';
 import 'package:oneline_bike_shopping_app/utils/constant/image_constant.dart';
 import 'package:oneline_bike_shopping_app/utils/themes/color_themes.dart';
 import 'package:oneline_bike_shopping_app/utils/widget/blue_button_widget.dart';
+import 'package:oneline_bike_shopping_app/utils/widget/button_widget.dart';
 import 'package:oneline_bike_shopping_app/utils/widget/text_widget.dart';
 
 class CartScreen extends StatefulWidget {
@@ -13,6 +15,34 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  double _arrowPosition = 0.0;
+  double _arrowEndPosition = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    // Calculate positions based on screen width
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        final screenWidth = MediaQuery.of(context).size.width;
+        _arrowPosition = screenWidth * 0.2; // 20% of the screen width
+        _arrowEndPosition = screenWidth * 0.68; // 80% of the screen width
+      });
+    });
+  }
+
+  void _animateArrow() {
+    setState(() {
+      // Move to end position if not at the end, else reset
+      if (_arrowPosition == _arrowEndPosition) {
+        _arrowPosition = _arrowEndPosition; // Stay at the end
+        // Navigate to checkout screen
+        Navigator.pushNamed(context, '/checkout');
+      } else {
+        _arrowPosition = _arrowEndPosition; // Move to end
+      }
+    });
+  }
   void _increaseQuantity(int index) {
     setState(() {
       cartItems[index].quantity++;
@@ -29,8 +59,16 @@ class _CartScreenState extends State<CartScreen> {
       }
     });
   }
+  num _calculateTotalPrice() {
+    num totalPrice = 0;
+    for (var item in cartItems) {
+      totalPrice += item.productPrice * item.quantity;
+    }
+    return totalPrice;
+  }
   @override
   Widget build(BuildContext context) {
+    num totalPrice = _calculateTotalPrice();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: primaryColor,
@@ -74,7 +112,7 @@ class _CartScreenState extends State<CartScreen> {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height *0.5,
+            height: MediaQuery.of(context).size.height *0.35,
             child: ListView.separated(
               separatorBuilder: (context, index) =>  const Divider(color: Colors.grey,),
               itemCount: cartItems.length,
@@ -174,7 +212,7 @@ class _CartScreenState extends State<CartScreen> {
                 child: Container(
                   height: 44,
                   width: 60,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.topRight,
                         end: Alignment.bottomLeft,
@@ -204,7 +242,132 @@ class _CartScreenState extends State<CartScreen> {
               ),
             ],
           ),
-        ],
+          mediumSpaceh,
+          customTextWidget(text: "Your bag qualifies for free shipping" , fontSize: 15 , color: Colors.white.withOpacity(0.6))
+        ,mediumSpaceh,
+          Padding(
+            padding: const EdgeInsets.only(left: 20 , right: 20 , bottom: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                customTextWidget(text: "Subtotal:", fontSize: 15 , fontWeight: FontWeight.w500, color: Colors.white.withOpacity(0.87)),
+                customTextWidget(text: "\$ ${totalPrice.toString()}", fontSize: 15 , color: Colors.white.withOpacity(0.6)),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20 , right: 20 , bottom: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                customTextWidget(text: "Delivery Fee:", fontSize: 15 , fontWeight: FontWeight.w500, color: Colors.white.withOpacity(0.87)),
+                customTextWidget(text: "\$0", fontSize: 15 , color: Colors.white.withOpacity(0.6)),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20 , right: 20 , bottom: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                customTextWidget(text: "Discount:", fontSize: 15 , fontWeight: FontWeight.w500, color: Colors.white.withOpacity(0.87)),
+                customTextWidget(text: "${30}%", fontSize: 15 , color: Colors.white.withOpacity(0.6)),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20 , right: 20 , bottom: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                customTextWidget(text: "Total:", fontSize: 15 , fontWeight: FontWeight.w500, color: Colors.white.withOpacity(0.87)),
+                customTextWidget(text: "\$${(totalPrice*0.7).toStringAsFixed(2)}", fontSize: 17 , color: lightBlueColor, fontWeight: FontWeight.bold,),
+              ],
+            ),
+          ),
+
+    // SizedBox(
+    //   height: 100,
+    //   width: double.infinity,
+    //   child: Stack(
+    //   alignment: Alignment.center,
+    //   children: [
+    //   // Animated arrow button that moves horizontally
+    //   AnimatedPositioned(
+    //   duration: const Duration(milliseconds: 500), // Animation duration
+    //   curve: Curves.easeInOut, // Smooth animation curve
+    //   left: _arrowPosition, // The position changes on button press
+    //   child: Container(
+    //   height: 44,
+    //   width: 44,
+    //   decoration: BoxDecoration(
+    //   color: Colors.lightBlue,
+    //   borderRadius: BorderRadius.circular(10),
+    //   ),
+    //   child: IconButton(
+    //   onPressed: () {
+    //   // Reverse the animation when the icon is pressed
+    //   _animateArrow();
+    //   },
+    //   icon: const Icon(
+    //   Icons.arrow_forward_ios_outlined,
+    //   color: Colors.white,
+    //   ),
+    //   ),
+    //   ),
+    //   ),
+    //   // Positioned Checkout button
+    //   Positioned(
+    //   right: 100, // Align to the right of the screen
+    //   child: customButtonWidget(text: "Checkout", onPressed: (){}, fontColor: Colors.white.withOpacity(0.6))
+    //   ),
+    //   ],
+    //   ),
+    // ),
+          SizedBox(
+            height: 100,
+            width: double.infinity,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                // Animated arrow button that moves horizontally
+                AnimatedPositioned(
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                  left: _arrowPosition,
+                  child: Container(
+                    height: 44,
+                    width: 44,
+                    decoration: BoxDecoration(
+                      color: Colors.lightBlue,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: IconButton(
+                      onPressed: _animateArrow,
+                      icon: const Icon(
+                        Icons.arrow_forward_ios_outlined,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                // Positioned Checkout button in the center
+                Positioned(
+                  child: customButtonWidget(
+                    text: "Checkout",
+                    onPressed: () {
+                      // Directly navigate to checkout if needed
+                      Navigator.pushNamed(context, '/checkout');
+                    },
+                    fontColor: Colors.white.withOpacity(0.6),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+
+    ],
       ),
     );
   }
