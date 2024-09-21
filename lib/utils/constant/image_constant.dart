@@ -15,4 +15,5 @@ abstract class ImageConstant {
   static const mountainButtonImage = 'assets/mountainButton.png';
   static const roadButtonImage = 'assets/roadButton.png';
   static const blueBackgroundImage = 'assets/bluebackground.png';
+  static const checkoutBackgroundImage = 'assets/checkoutBackground.png';
 }

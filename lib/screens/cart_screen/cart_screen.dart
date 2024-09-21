@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oneline_bike_shopping_app/data/data.dart';
+import 'package:oneline_bike_shopping_app/screens/checkout_screen/checkout_screen.dart';
 import 'package:oneline_bike_shopping_app/utils/constant/app_constant.dart';
 import 'package:oneline_bike_shopping_app/utils/constant/image_constant.dart';
 import 'package:oneline_bike_shopping_app/utils/themes/color_themes.dart';
@@ -17,6 +18,7 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   double _arrowPosition = 0.0;
   double _arrowEndPosition = 0.0;
+  bool isCheckoutReady =false;
 
   @override
   void initState() {
@@ -33,11 +35,12 @@ class _CartScreenState extends State<CartScreen> {
 
   void _animateArrow() {
     setState(() {
-      // Move to end position if not at the end, else reset
       if (_arrowPosition == _arrowEndPosition) {
+        isCheckoutReady = true;
         _arrowPosition = _arrowEndPosition; // Stay at the end
         // Navigate to checkout screen
-        Navigator.pushNamed(context, '/checkout');
+
+
       } else {
         _arrowPosition = _arrowEndPosition; // Move to end
       }
@@ -112,7 +115,7 @@ class _CartScreenState extends State<CartScreen> {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height *0.35,
+            height: MediaQuery.of(context).size.height *0.45,
             child: ListView.separated(
               separatorBuilder: (context, index) =>  const Divider(color: Colors.grey,),
               itemCount: cartItems.length,
@@ -154,7 +157,7 @@ class _CartScreenState extends State<CartScreen> {
                               fontSize: 13,
                               color: const Color(0xff3C9EEA),
                             ),
-                            SizedBox(width: 50,),
+                            const SizedBox(width: 50,),
                             Row(
                               children: [
                                 InkWell(
@@ -220,7 +223,7 @@ class _CartScreenState extends State<CartScreen> {
                         colors: [Colors.white, Colors.black]
                     ),
                   ),
-                  child: TextField(
+                  child: const TextField(
                     obscureText: false,
 
                     decoration: InputDecoration(
@@ -285,47 +288,8 @@ class _CartScreenState extends State<CartScreen> {
               ],
             ),
           ),
-
-    // SizedBox(
-    //   height: 100,
-    //   width: double.infinity,
-    //   child: Stack(
-    //   alignment: Alignment.center,
-    //   children: [
-    //   // Animated arrow button that moves horizontally
-    //   AnimatedPositioned(
-    //   duration: const Duration(milliseconds: 500), // Animation duration
-    //   curve: Curves.easeInOut, // Smooth animation curve
-    //   left: _arrowPosition, // The position changes on button press
-    //   child: Container(
-    //   height: 44,
-    //   width: 44,
-    //   decoration: BoxDecoration(
-    //   color: Colors.lightBlue,
-    //   borderRadius: BorderRadius.circular(10),
-    //   ),
-    //   child: IconButton(
-    //   onPressed: () {
-    //   // Reverse the animation when the icon is pressed
-    //   _animateArrow();
-    //   },
-    //   icon: const Icon(
-    //   Icons.arrow_forward_ios_outlined,
-    //   color: Colors.white,
-    //   ),
-    //   ),
-    //   ),
-    //   ),
-    //   // Positioned Checkout button
-    //   Positioned(
-    //   right: 100, // Align to the right of the screen
-    //   child: customButtonWidget(text: "Checkout", onPressed: (){}, fontColor: Colors.white.withOpacity(0.6))
-    //   ),
-    //   ],
-    //   ),
-    // ),
           SizedBox(
-            height: 100,
+            height: 44,
             width: double.infinity,
             child: Stack(
               alignment: Alignment.center,
@@ -343,7 +307,9 @@ class _CartScreenState extends State<CartScreen> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: IconButton(
-                      onPressed: _animateArrow,
+                      onPressed: isCheckoutReady == false ? _animateArrow : (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => CheckoutScreen(),));
+                      },
                       icon: const Icon(
                         Icons.arrow_forward_ios_outlined,
                         color: Colors.white,
