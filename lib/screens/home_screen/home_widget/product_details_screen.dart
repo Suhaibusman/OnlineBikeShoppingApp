@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:oneline_bike_shopping_app/data/data.dart';
+import 'package:oneline_bike_shopping_app/domain/product_model.dart';
+import 'package:oneline_bike_shopping_app/screens/cart_screen/cart_screen.dart';
 import 'package:oneline_bike_shopping_app/utils/constant/image_constant.dart';
 import 'package:oneline_bike_shopping_app/utils/themes/color_themes.dart';
 import 'package:oneline_bike_shopping_app/utils/widget/blue_button_widget.dart';
@@ -6,16 +9,12 @@ import 'package:oneline_bike_shopping_app/utils/widget/button_widget.dart';
 import 'package:oneline_bike_shopping_app/utils/widget/text_widget.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  final String productTitle;
-  final String productPrice;
-  final String productImage;
-  final String productName;
+  final ProductModel productData;
+
   const ProductDetailsScreen(
       {super.key,
-      required this.productTitle,
-      required this.productPrice,
-      required this.productImage,
-      required this.productName});
+      required this.productData,
+    });
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +33,7 @@ class ProductDetailsScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
                     height: 44,
@@ -53,22 +53,24 @@ class ProductDetailsScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  const Spacer(),
                   Align(
                     alignment: Alignment.center,
                     child: customTextWidget(
-                      text: productName,
+                      text: productData.productName,
                       fontSize: 20,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  const Spacer(),
                 ],
               ),
             ),
             const SizedBox(
               height: 20,
             ),
-            Image(image: AssetImage(productImage)),
+            Image(image: AssetImage(productData.productImage)),
 
             Container(
               height: 110,
@@ -131,7 +133,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     customTextWidget(
-                                      text: productName,
+                                      text: productData.productName,
                                       fontSize: 15,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -161,10 +163,74 @@ class ProductDetailsScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
 
                                   children: [
-                                    customTextWidget(text: productPrice , color: lightBlueColor ,fontSize: 24 , ),
+                                    customTextWidget(text: "\$ ${productData.productPrice}" , color: lightBlueColor ,fontSize: 24 , ),
                                     const SizedBox(width: 30,),
                                     customBlueButtonWidget(
-                                        text: "Add to Cart", onPressed: () {}, fontColor: Colors.white),
+                                      text: "Add to Cart",
+                                      onPressed: () {
+                                        bool found = false;
+                                        for (var item in cartItems) {
+                                          if (item.productName == productData.productName) {
+                                            found = true;
+                                            // Show the dialog to confirm increasing quantity
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) => AlertDialog(
+                                                title: customTextWidget(text: "This Product is Already in Cart" , fontSize: 20),
+                                                content: customTextWidget(text: "Do you want to increase the quantity?" , ),
+                                                actions: [
+                                                  Row(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      customButtonWidget(
+                                                        buttonWidth: 100,
+                                                        text: "Yes",
+                                                        onPressed: () {
+                                                          item.quantity++; // Increase quantity by 1
+                                                        print("cart items $cartItems");
+                                                          print("Cart Items :${cartItems.first.quantity}");
+                                                          Navigator.pop(context); // Close the dialog
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen(),));
+                                                        },
+                                                        fontColor: Colors.white,
+                                                      ),
+                                                      const SizedBox(width: 20,),
+                                                      customButtonWidget(
+                                                        buttonWidth: 100,
+                                                        text: "No",
+                                                        onPressed: () {
+                                                          Navigator.pop(context); // Close the dialog without doing anything
+                                                        },
+                                                        fontColor: Colors.white,
+                                                      ),
+                                                    ],
+                                                  )
+
+                                                ],
+                                              ),
+                                            );
+                                            break; // Break the loop as we found the item
+                                          }
+                                        }
+
+                                        // If the product wasn't found in the cart, add it
+                                        if (!found) {
+                                          cartItems.add(ProductModel(
+                                            productName: productData.productName,
+                                            productPrice: productData.productPrice,
+                                            productDetails: productData.productDetails,
+                                            productImage: productData.productImage,
+                                            productDescription: productData.productDescription,
+                                            quantity: 1, // Initialize quantity for new item
+                                          ));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen(),));
+                                        }
+
+                                        print("Cart Items: $cartItems");
+                                        print("Cart Items :${cartItems.first.quantity}");
+                                      },
+                                      fontColor: Colors.white,
+                                    ),
                                   ],
                                 ),
                               )

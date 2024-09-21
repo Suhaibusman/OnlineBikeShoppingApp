@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:oneline_bike_shopping_app/domain/product_model.dart';
 import 'package:oneline_bike_shopping_app/screens/home_screen/home_widget/product_details_screen.dart';
 import 'package:oneline_bike_shopping_app/utils/constant/image_constant.dart';
 import 'package:oneline_bike_shopping_app/utils/widget/text_widget.dart';
 
 class SmallImageWidget extends StatelessWidget {
-  final String productTitle;
-  final String productPrice;
-  final String productImage;
-  final String productName;
+  final ProductModel productData;
+
   const SmallImageWidget(
       {super.key,
-      required this.productTitle,
-      required this.productPrice,
-      required this.productImage,
-      required this.productName});
+      required this.productData,
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +20,7 @@ class SmallImageWidget extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => ProductDetailsScreen(
-              productTitle: productTitle,
-              productPrice: productPrice,
-              productImage: productImage,
-              productName: productName,
+              productData: productData,
             ),
           ),
         );
@@ -55,7 +49,7 @@ class SmallImageWidget extends StatelessWidget {
             ),
             Center(
               child: Image.asset(
-                productImage,
+                productData.productImage,
                 height: 70,
                 width: 100, // And also the width
                 // fit: BoxFit.contain,
@@ -70,19 +64,19 @@ class SmallImageWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   customTextWidget(
-                    text: productName,
+                    text: productData.productName,
                     fontSize: 15,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                   customTextWidget(
-                    text: productTitle,
+                    text: productData.productDetails,
                     fontSize: 13,
                     color: Colors.grey,
                     fontWeight: FontWeight.normal,
                   ),
                   customTextWidget(
-                    text: productPrice,
+                    text: "\$ ${productData.productPrice}",
                     fontSize: 13,
                     color: Colors.grey,
                     fontWeight: FontWeight.normal,

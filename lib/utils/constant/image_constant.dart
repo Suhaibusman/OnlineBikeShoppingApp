@@ -6,6 +6,10 @@ abstract class ImageConstant {
   static const imageBackground = 'assets/imageBackground.png';
   static const smallImageBackground = 'assets/smallImageBackground.png';
   static const bottomSheetButton = 'assets/bottomsheetbutton.png';
+  static const cartImageBackground = 'assets/cartImageBackground.png';
+  static const minusButton = 'assets/minusButton.png';
+  static const plusButton = 'assets/plusButton.png';
+
 
   static const blueBackgroundImage = 'assets/bluebackground.png';
 }

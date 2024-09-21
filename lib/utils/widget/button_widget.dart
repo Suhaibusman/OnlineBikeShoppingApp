@@ -6,13 +6,15 @@ Widget customButtonWidget({
   required String text,
   required Function() onPressed,
   required Color fontColor,
+  double buttonHeight = 43,
+  double buttonWidth = 129,
   FontWeight fontWeight = FontWeight.normal,
 }) {
   return InkWell(
     onTap: onPressed,
     child: Container(
-        height: 43,
-        width: 129,
+        height: buttonHeight,
+        width: buttonWidth,
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(ImageConstant.bottomSheetButton),
