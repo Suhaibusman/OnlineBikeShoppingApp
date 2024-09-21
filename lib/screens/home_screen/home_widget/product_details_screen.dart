@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oneline_bike_shopping_app/utils/constant/image_constant.dart';
 import 'package:oneline_bike_shopping_app/utils/themes/color_themes.dart';
-import 'package:oneline_bike_shopping_app/utils/widget/blue_button_widget';
+import 'package:oneline_bike_shopping_app/utils/widget/blue_button_widget.dart';
 import 'package:oneline_bike_shopping_app/utils/widget/button_widget.dart';
 import 'package:oneline_bike_shopping_app/utils/widget/text_widget.dart';
 
@@ -69,8 +69,7 @@ class ProductDetailsScreen extends StatelessWidget {
               height: 20,
             ),
             Image(image: AssetImage(productImage)),
-            customBlueButtonWidget(
-                text: "Apply", onPressed: () {}, fontColor: Colors.white),
+
             Container(
               height: 110,
               decoration: BoxDecoration(
@@ -160,12 +159,12 @@ class ProductDetailsScreen extends StatelessWidget {
                                 ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
+
                                   children: [
-                                    customButtonWidget(
-                                      text: "Add to Cart",
-                                      fontColor: Colors.white,
-                                      onPressed: () {},
-                                    ),
+                                    customTextWidget(text: productPrice , color: lightBlueColor ,fontSize: 24 , ),
+                                    const SizedBox(width: 30,),
+                                    customBlueButtonWidget(
+                                        text: "Add to Cart", onPressed: () {}, fontColor: Colors.white),
                                   ],
                                 ),
                               )
