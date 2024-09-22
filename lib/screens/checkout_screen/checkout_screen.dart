@@ -14,7 +14,7 @@ class CheckoutScreen extends StatefulWidget {
 class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: primaryColor,
       body: Column(
         children: [
@@ -55,18 +55,24 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               ],
             ),
           ),
-        mediumSpaceh,
+          mediumSpaceh,
           Container(
-
-            height: MediaQuery.of(context).size.height*0.28,
-            width: MediaQuery.of(context).size.width*0.9,
+            height: MediaQuery.of(context).size.height * 0.28,
+            width: MediaQuery.of(context).size.width * 0.9,
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(ImageConstant.checkoutBackgroundImage),
                 fit: BoxFit.cover,
               ),
             ),
-            child: customTextWidget(text: "Shipping Address" , color: Colors.white),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: customTextWidget(
+                  text: "Shipping \n Address",
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold),
+            ),
           )
         ],
       ),
