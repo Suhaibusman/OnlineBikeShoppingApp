@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:oneline_bike_shopping_app/screens/home_screen/home_screen.dart';
+import 'package:oneline_bike_shopping_app/utils/themes/color_themes.dart';
 
 class BottomNavBar extends StatefulWidget {
   @override
@@ -9,7 +11,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    const Center(child: Text('Bike Page')),
+    HomeScreen(),
     const Center(child: Text('Map Page')),
     const Center(child: Text('Cart Page')),
     const Center(child: Text('Profile Page')),
@@ -19,22 +21,28 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
+
       body: _pages[_selectedIndex],
       bottomNavigationBar: Stack(
         children: [
           // Custom background with curve
-          ClipPath(
-            clipper: BottomNavBarClipper(),
-            child: Container(
-              height: 80,
-              color: const Color(0xFF2B2E4A), // Background color of the navbar
-            ),
+          Container(
+            height: 80,
+            color: primaryColor,
+
+            // decoration: BoxDecoration(
+            //   image: const DecorationImage(
+            //     image: AssetImage("assets/navBarRectangle.png"),
+            //     fit: BoxFit.cover,
+            //   ),
+            // ), // Background color of the navbar
           ),
           // Positioned icons
           Positioned(
             left: 0,
             right: 0,
-            bottom: 0,
+            bottom: 10,
             child: Container(
               height: 70,
               child: Row(
@@ -56,51 +64,47 @@ class _BottomNavBarState extends State<BottomNavBar> {
   }
 
   Widget _buildNavBarItem(IconData icon, int index) {
+    bool isSelected = _selectedIndex == index;
+
     return GestureDetector(
       onTap: () {
         setState(() {
           _selectedIndex = index;
         });
       },
-      child: Icon(
-        icon,
-        size: 30,
-        color: _selectedIndex == index
-            ? Colors.blue
-            : Colors.white, // Highlight selected icon
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Apply transform to move the selected item outside the navbar
+          isSelected
+              ? Transform.translate(
+            offset: const Offset(0, -30), // Move the selected item up by 20
+            child: Container(
+              height: 65,
+              width: 65,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/navbarBox.png"),
+                ),
+              ),
+              child: Icon(
+                icon,
+                size: 30,
+                color: Colors.white, // Highlight selected icon color
+              ),
+            ),
+          )
+              : Icon(
+            icon,
+            size: 30,
+            color: Colors.white, // Unselected icon color
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildCenterNavBarItem(IconData icon) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _selectedIndex = 2; // Middle item for Cart
-        });
-      },
-      child: Container(
-        height: 65,
-        width: 65,
-        decoration: const BoxDecoration(
-          color: Color(0xFF0F9AFE), // Blue color for the center button
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              blurRadius: 5,
-              offset: Offset(0, 3),
-            ),
-          ],
-        ),
-        child: Icon(
-          icon,
-          size: 35,
-          color: Colors.white, // White color for the center icon
-        ),
-      ),
-    );
-  }
+
 }
 
 // CustomClipper to create the curved background of the navbar

@@ -16,4 +16,9 @@ abstract class ImageConstant {
   static const roadButtonImage = 'assets/roadButton.png';
   static const blueBackgroundImage = 'assets/bluebackground.png';
   static const checkoutBackgroundImage = 'assets/checkoutBackground.png';
+  static const allIcon = 'assets/allIcon.png';
+  static const batteryIcon = 'assets/batteryIcon.png';
+  static const roadIcon = 'assets/roadIcon.png';
+  static const unionIcon = 'assets/unionIcon.png';
+  static const helmetIcon = 'assets/helmetIcon.png';
 }
