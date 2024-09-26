@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:oneline_bike_shopping_app/screens/app_info_screen/app_info_screen.dart';
+import 'package:oneline_bike_shopping_app/screens/cart_screen/cart_screen.dart';
 import 'package:oneline_bike_shopping_app/screens/home_screen/home_screen.dart';
+import 'package:oneline_bike_shopping_app/screens/map_screen/map_screen.dart';
+import 'package:oneline_bike_shopping_app/screens/profile_screen/profile_screen.dart';
+import 'package:oneline_bike_shopping_app/utils/constant/image_constant.dart';
 import 'package:oneline_bike_shopping_app/utils/themes/color_themes.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -12,10 +17,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   final List<Widget> _pages = [
     HomeScreen(),
-    const Center(child: Text('Map Page')),
-    const Center(child: Text('Cart Page')),
-    const Center(child: Text('Profile Page')),
-    const Center(child: Text('Orders Page')),
+    MapScreenPlaceholder(),
+  CartScreen(),
+   ProfileScreen(),
+    AppInfoScreen(),
   ];
 
   @override
@@ -48,12 +53,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _buildNavBarItem(Icons.directions_bike, 0),
-                  _buildNavBarItem(Icons.map, 1),
-                  _buildNavBarItem(Icons.shopping_cart, 2),
+                  _buildNavBarItem(ImageConstant.navBarIcon1, 0),
+                  _buildNavBarItem(ImageConstant.navBarIcon2, 1),
+                  _buildNavBarItem(ImageConstant.navBarIcon3, 2),
                   // _buildCenterNavBarItem(Icons.shopping_cart),
-                  _buildNavBarItem(Icons.person, 3),
-                  _buildNavBarItem(Icons.receipt, 4),
+                  _buildNavBarItem(ImageConstant.navBarIcon4, 3),
+                  _buildNavBarItem(ImageConstant.navBarIcon5, 4),
                 ],
               ),
             ),
@@ -63,7 +68,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     );
   }
 
-  Widget _buildNavBarItem(IconData icon, int index) {
+  Widget _buildNavBarItem(String icon, int index) {
     bool isSelected = _selectedIndex == index;
 
     return GestureDetector(
@@ -87,18 +92,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   image: AssetImage("assets/navbarBox.png"),
                 ),
               ),
-              child: Icon(
-                icon,
-                size: 30,
-                color: Colors.white, // Highlight selected icon color
-              ),
+              child: Image.asset(icon),
             ),
           )
-              : Icon(
-            icon,
-            size: 30,
-            color: Colors.white, // Unselected icon color
-          ),
+              : Image.asset(icon),
         ],
       ),
     );

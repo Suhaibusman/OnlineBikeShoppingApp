@@ -21,4 +21,9 @@ abstract class ImageConstant {
   static const roadIcon = 'assets/roadIcon.png';
   static const unionIcon = 'assets/unionIcon.png';
   static const helmetIcon = 'assets/helmetIcon.png';
+  static const navBarIcon1 = 'assets/navbar1.png';
+  static const navBarIcon2 = 'assets/navbar2.png';
+  static const navBarIcon3 = 'assets/navbar3.png';
+  static const navBarIcon4 = 'assets/navbar4.png';
+  static const navBarIcon5 = 'assets/navbar5.png';
 }

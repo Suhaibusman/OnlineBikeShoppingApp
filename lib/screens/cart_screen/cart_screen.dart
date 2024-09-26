@@ -115,7 +115,7 @@ class _CartScreenState extends State<CartScreen> {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height *0.45,
+            height: MediaQuery.of(context).size.height *0.35,
             child: ListView.separated(
               separatorBuilder: (context, index) =>  const Divider(color: Colors.grey,),
               itemCount: cartItems.length,

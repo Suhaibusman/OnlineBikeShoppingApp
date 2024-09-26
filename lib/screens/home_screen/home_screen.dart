@@ -150,22 +150,19 @@ class _HomeScreenState extends State<HomeScreen> {
               const ProductTypeSelection(),
               Padding(
                 padding: const EdgeInsets.all(20),
-                child: SizedBox(
-                  height: 700,
-                  child: GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: productsData.length,
-                      gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, // 2 items per row
-                          crossAxisSpacing: 10, // spacing between columns
-                          // mainAxisSpacing: 10, // spacing between rows
-                          childAspectRatio: 0.7,
-                          mainAxisSpacing: 0.5),
-                      itemBuilder: (context, index) => SmallImageWidget(
-                        productData: productsData[index],)),
-                ),
+                child: GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: productsData.length,
+                    gridDelegate:
+                    const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, // 2 items per row
+                        crossAxisSpacing: 10, // spacing between columns
+                        // mainAxisSpacing: 10, // spacing between rows
+                        childAspectRatio: 0.7,
+                        mainAxisSpacing: 0.5),
+                    itemBuilder: (context, index) => SmallImageWidget(
+                      productData: productsData[index],)),
               ),
             ],
           ),
