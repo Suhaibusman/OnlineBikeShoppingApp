@@ -1,4 +1,3 @@
-
 import 'package:oneline_bike_shopping_app/screens/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:oneline_bike_shopping_app/utils/widget/blue_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,8 @@ import '../../../utils/widget/custom_text_field.dart';
 class SignupScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -24,10 +24,10 @@ class SignupScreen extends StatelessWidget {
             end: Alignment.bottomRight,
             colors: [Color(0xFF34C8E8), Color(0xFF4E4AF2)],
           ),
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(30),
-            bottomRight: Radius.circular(30),
-          ),
+          // borderRadius: BorderRadius.only(
+          //   bottomLeft: Radius.circular(30),
+          //   bottomRight: Radius.circular(30),
+          // ),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -39,13 +39,10 @@ class SignupScreen extends StatelessWidget {
                 Image.asset("assets/logo.png", height: 100, width: 100),
                 SizedBox(height: 20),
                 customTextWidget(
-                  text:
-                  'Create an Account',
-
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-
+                  text: 'Create an Account',
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
                 const SizedBox(height: 40),
 
@@ -95,15 +92,20 @@ class SignupScreen extends StatelessWidget {
 
                 // Signup Button
 
-
                 customBlueButtonWidget(
-
-                    text: "Sign Up", onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
-                }, fontColor: Colors.white ,
+                    text: "Sign Up",
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BottomNavBar(),
+                          ));
+                    },
+                    fontColor: Colors.white,
                     // buttonColor: Colors.white ,
 
-                    buttonHeight: 40 ,  fontWeight: FontWeight.w600),
+                    buttonHeight: 40,
+                    fontWeight: FontWeight.w600),
                 const SizedBox(height: 20),
 
                 // Login Navigation
@@ -111,8 +113,7 @@ class SignupScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     customTextWidget(
-                  text:
-                      'Already have an account?',
+                      text: 'Already have an account?',
                       color: Colors.white,
                     ),
                     TextButton(
@@ -120,12 +121,9 @@ class SignupScreen extends StatelessWidget {
                         Navigator.pop(context);
                       },
                       child: customTextWidget(
-                  text:
-                        'Login',
-
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-
+                        text: 'Login',
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],

@@ -36,26 +36,28 @@ class ProductTypeWidget extends StatelessWidget {
             // Conditional gradient based on whether the widget is selected or not
             gradient: selectedProductIndex == index
                 ? const LinearGradient(
-              colors: [
-                Color(0xFF34C8E8), // Start color: #34C8E8
-                Color(0xFF4E4AF2), // End color: #4E4AF2
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            )
+                    colors: [
+                      Color(0xFF34C8E8), // Start color: #34C8E8
+                      Color(0xFF4E4AF2), // End color: #4E4AF2
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  )
                 : const LinearGradient(
-              colors: [
-                Color(0xFF1A1A1A), // Dark gray start color (instead of pure black)
-                Color(0xFF4A4A4A), // Medium dark gray
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
+                    colors: [
+                      Color(
+                          0xFF1A1A1A), // Dark gray start color (instead of pure black)
+                      Color(0xFF4A4A4A), // Medium dark gray
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
           ),
           child: Image.asset(
             iconPath,
             errorBuilder: (context, error, stackTrace) {
-              print('Error loading image: $error'); // Debugging to track image loading issues
+              print(
+                  'Error loading image: $error'); // Debugging to track image loading issues
               return Icon(Icons.error, color: Colors.red);
             },
           ),

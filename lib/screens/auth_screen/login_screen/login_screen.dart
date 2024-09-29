@@ -25,10 +25,10 @@ class LoginScreen extends StatelessWidget {
             end: Alignment.bottomRight,
             colors: [Color(0xFF34C8E8), Color(0xFF4E4AF2)],
           ),
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(30),
-            bottomRight: Radius.circular(30),
-          ),
+          // borderRadius: BorderRadius.only(
+          //   bottomLeft: Radius.circular(30),
+          //   bottomRight: Radius.circular(30),
+          // ),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -40,13 +40,10 @@ class LoginScreen extends StatelessWidget {
                 Image.asset("assets/logo.png", height: 100, width: 100),
                 SizedBox(height: 20),
                 customTextWidget(
-                  text:
-                  'Welcome Back!',
-
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-
+                  text: 'Welcome Back!',
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
                 SizedBox(height: 40),
 
@@ -82,8 +79,7 @@ class LoginScreen extends StatelessWidget {
                 // Login Button with validation check
                 customBlueButtonWidget(
                   text: "Login",
-                    buttonHeight: 40,
-
+                  buttonHeight: 40,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       // If the form is valid, navigate to the BottomNavBar screen
@@ -96,7 +92,6 @@ class LoginScreen extends StatelessWidget {
                     }
                   },
                   fontColor: Colors.white,
-
                   fontWeight: FontWeight.w600,
                 ),
                 SizedBox(height: 20),
@@ -106,24 +101,21 @@ class LoginScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     customTextWidget(
-                  text:
-                      'Don\'t have an account?',
-                     color: Colors.white,
+                      text: 'Don\'t have an account?',
+                      color: Colors.white,
                     ),
                     TextButton(
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SignupScreen()),
+                          MaterialPageRoute(
+                              builder: (context) => SignupScreen()),
                         );
                       },
                       child: customTextWidget(
-                  text:
-                        'Sign Up',
-
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-
+                        text: 'Sign Up',
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
