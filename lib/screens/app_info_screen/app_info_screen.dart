@@ -17,6 +17,7 @@ class AppInfoScreen extends StatelessWidget {
           color: Colors.white,
         ),
         backgroundColor: primaryColor,
+        automaticallyImplyLeading: false,
       ),
       body: Stack(
         children: [

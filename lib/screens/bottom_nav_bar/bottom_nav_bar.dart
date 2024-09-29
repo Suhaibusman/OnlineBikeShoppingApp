@@ -16,10 +16,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    HomeScreen(),
+    const HomeScreen(),
     MapScreenPlaceholder(),
-  CartScreen(),
-   ProfileScreen(),
+  const CartScreen(),
+   const ProfileScreen(),
     AppInfoScreen(),
   ];
 

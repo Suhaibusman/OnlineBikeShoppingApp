@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:oneline_bike_shopping_app/utils/themes/color_themes.dart';
 
 class ProductTypeWidget extends StatelessWidget {
   final int index;
@@ -24,7 +23,7 @@ class ProductTypeWidget extends StatelessWidget {
     return Positioned(
       bottom: bottomPosition,
       left: leftPosition,
-      child: InkWell(
+      child: GestureDetector(
         onTap: () {
           print('Tapped on index $index'); // Debugging to track taps
           onTap(index); // Call the parent's onTap to update the selected index
@@ -33,8 +32,25 @@ class ProductTypeWidget extends StatelessWidget {
           height: 50,
           width: 50,
           decoration: BoxDecoration(
-            color: selectedProductIndex == index ? primaryColor : lightBlueColor, // Change color based on index
             borderRadius: BorderRadius.circular(10),
+            // Conditional gradient based on whether the widget is selected or not
+            gradient: selectedProductIndex == index
+                ? const LinearGradient(
+              colors: [
+                Color(0xFF34C8E8), // Start color: #34C8E8
+                Color(0xFF4E4AF2), // End color: #4E4AF2
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            )
+                : const LinearGradient(
+              colors: [
+                Color(0xFF1A1A1A), // Dark gray start color (instead of pure black)
+                Color(0xFF4A4A4A), // Medium dark gray
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
           ),
           child: Image.asset(
             iconPath,

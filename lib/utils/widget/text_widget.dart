@@ -9,7 +9,7 @@ Widget customTextWidget(
     int? maxLines,
     TextAlign textAlign = TextAlign.start,
     FontWeight fontWeight = FontWeight.normal,
-    Color color = Colors.black,
+    Color? color = Colors.black,
     double? lineheight}) {
   return AutoSizeText(
     text,
