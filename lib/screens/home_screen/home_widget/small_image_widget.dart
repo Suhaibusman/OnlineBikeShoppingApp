@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oneline_bike_shopping_app/data/data.dart';
 import 'package:oneline_bike_shopping_app/domain/product_model.dart';
 import 'package:oneline_bike_shopping_app/screens/home_screen/home_widget/product_details_screen.dart';
 import 'package:oneline_bike_shopping_app/utils/constant/image_constant.dart';
@@ -6,10 +7,12 @@ import 'package:oneline_bike_shopping_app/utils/widget/text_widget.dart';
 
 class SmallImageWidget extends StatefulWidget {
   final ProductModel productData;
+  final VoidCallback onFavouriteChanged;
 
   const SmallImageWidget(
       {super.key,
       required this.productData,
+      required this.onFavouriteChanged
       });
 
   @override
@@ -17,8 +20,10 @@ class SmallImageWidget extends StatefulWidget {
 }
 
 class _SmallImageWidgetState extends State<SmallImageWidget> {
+
   @override
   Widget build(BuildContext context) {
+    bool isFav = favouriteItems.contains(widget.productData);
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -47,12 +52,26 @@ class _SmallImageWidgetState extends State<SmallImageWidget> {
               child: IconButton(
                 onPressed: () {
                   setState(() {
-                    widget.productData.isFav = !widget.productData.isFav;
+                    if (isFav) {
+                      // Remove from favorite list
+                      favouriteItems.remove(widget.productData);
+                      widget.productData.isFav = false; // Update model
+                    } else {
+                      // Add to favorite list
+                      favouriteItems.add(widget.productData);
+                      widget.productData.isFav = true; // Update model
+                    }
+                    widget.onFavouriteChanged();
                   });
+
+
+
+
+
                 },
                 icon:  Icon(
-                  widget.productData.isFav ==true ?Icons.favorite : Icons.favorite_border,
-                  color: widget.productData.isFav ==true ? Colors.red:  Colors.white,
+                  isFav ==true ?Icons.favorite : Icons.favorite_border,
+                  color: isFav ==true ? Colors.red:  Colors.white,
                 ),
               ),
             ),
