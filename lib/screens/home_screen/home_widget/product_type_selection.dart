@@ -16,9 +16,10 @@ class _ProductTypeSelectionState extends State<ProductTypeSelection> {
   @override
   Widget build(BuildContext context) {
     return Transform.translate(
-      offset: const Offset(0, -25),
-      child: SizedBox(
-        height: 150,
+      offset: const Offset(0, 90),
+      child: Container(
+color: Colors.red,
+        height: 0,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Stack(

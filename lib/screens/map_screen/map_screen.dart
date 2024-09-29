@@ -8,6 +8,7 @@ class MapScreenPlaceholder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: customTextWidget(text: "Map Screen", color: Colors.white , fontWeight: FontWeight.bold , fontSize: 24),
 
         backgroundColor: primaryColor,
