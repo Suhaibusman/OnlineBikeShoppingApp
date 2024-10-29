@@ -8,7 +8,7 @@ void main() {
     Builder(
       builder: (context) {
         // Define a threshold width for the device preview
-        final double thresholdWidth = 600.0; // Example threshold for larger screens
+        const double thresholdWidth = 500.0; // Example threshold for larger screens
         final bool showDevicePreview = MediaQuery.of(context).size.width > thresholdWidth;
 
         return showDevicePreview
