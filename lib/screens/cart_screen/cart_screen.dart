@@ -351,8 +351,12 @@ class _CartScreenState extends State<CartScreen> {
                     child: customButtonWidget(
                       text: "Checkout",
                       onPressed: () {
-                        // Directly navigate to checkout if needed
-                        Navigator.pushNamed(context, '/checkout');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CheckoutScreen(),
+                          ),
+                        );
                       },
                       fontColor: Colors.white.withOpacity(0.6),
                     ),
